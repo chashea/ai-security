@@ -709,13 +709,13 @@
             <div class="sig-item"><span class="sig-arrow" style="color:var(--defender)">&rarr;</span> Sign-in risk scores &amp; anomaly detections to Defender XDR incident graph</div>
             <div class="sig-item"><span class="sig-arrow" style="color:var(--defender)">&rarr;</span> Workload identity risk detections (Entra ID Protection) to Defender XDR</div>
             <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&rarr;</span> Users / groups directory read consumed by Purview DLP policy scoping</div>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--dfc)">&rarr;</span> Service principal inventory read by Defender for Cloud CIEM (multi-cloud)</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--dfc)">&rarr;</span> Service principal inventory context consumed by Defender for Cloud attack-path and exposure analysis</div>
           </fluent-card>
           <fluent-card class="sig-col">
             <h5>Signals Received &larr;</h5>
             <div class="sig-item"><span class="sig-arrow" style="color:var(--defender)">&larr;</span> Confirmed-compromise risk feedback from Defender XDR / Defender for Identity</div>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&larr;</span> Adaptive Protection risk levels from Purview Insider Risk (CA condition, Preview)</div>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&larr;</span> Sensitivity-label-driven authentication contexts (SharePoint / Teams) evaluated by CA</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&larr;</span> Adaptive Protection risk levels from Purview Insider Risk consumed by Entra CA policies (preview)</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&larr;</span> Sensitivity-label authentication context from SharePoint / Teams evaluated by Conditional Access</div>
           </fluent-card>
         </div>
       </fluent-tab-panel>
@@ -783,9 +783,9 @@
           <fluent-card class="sig-col">
             <h5>Signals Received &larr;</h5>
             <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&larr;</span> Identity context joins DfC alerts via the Defender XDR unified incident</div>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&larr;</span> Service principal inventory &amp; permissions read from Entra ID by DfC CIEM</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&larr;</span> Service principal inventory and permission context from Entra used in Defender for Cloud attack-path analysis</div>
             <div class="sig-item"><span class="sig-arrow" style="color:var(--defender)">&larr;</span> Incident response actions from Defender XDR for compute isolation (Defender for Servers)</div>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&larr;</span> Sensitive Data Discovery is native to Defender CSPM (parallel to, not sourced from, Purview labels)</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&larr;</span> Defender XDR incident context can include Purview DLP and Insider Risk signals alongside DfC alerts</div>
           </fluent-card>
         </div>
       </fluent-tab-panel>
@@ -847,7 +847,7 @@
           <fluent-card class="sig-col">
             <h5>Signals Sent &rarr;</h5>
             <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&rarr;</span> Risky user escalation ("mark as compromised") to Entra ID Protection for risk-based CA</div>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&rarr;</span> MDCA-discovered AI SaaS apps shared with Purview DSPM for AI inventory</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&rarr;</span> Defender for Cloud Apps discovery data can populate Purview DSPM for AI inventory</div>
             <div class="sig-item"><span class="sig-arrow" style="color:var(--dfc)">&rarr;</span> Auto attack disruption containment (isolate / disable) extending to DfC-protected workloads</div>
           </fluent-card>
           <fluent-card class="sig-col">
@@ -918,8 +918,8 @@
             <h5>Signals Sent &rarr;</h5>
             <div class="sig-item"><span class="sig-arrow" style="color:var(--defender)">&rarr;</span> DLP match alerts to Defender XDR unified incidents</div>
             <div class="sig-item"><span class="sig-arrow" style="color:var(--defender)">&rarr;</span> Insider Risk alerts &amp; DataSecurityEvents to Defender XDR correlation</div>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&rarr;</span> Labels bound to authentication contexts (SharePoint / Teams) evaluated by Conditional Access</div>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&rarr;</span> Insider Risk-driven Adaptive Protection risk levels consumed by Entra CA condition</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&rarr;</span> Labels in SharePoint / Teams can drive authentication context evaluated by Entra Conditional Access</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&rarr;</span> Insider Risk-driven Adaptive Protection risk levels can be consumed by Entra CA conditions (preview)</div>
           </fluent-card>
           <fluent-card class="sig-col">
             <h5>Signals Received &larr;</h5>
@@ -985,8 +985,8 @@
         <div class="sig-grid">
           <fluent-card class="sig-col">
             <h5>Signals Sent &rarr;</h5>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--defender)">&rarr;</span> Agent inventory &amp; runtime telemetry to Defender XDR (AIAgentsInfo Preview + CloudAppEvents)</div>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&rarr;</span> Agent identity context to Entra for Conditional Access for Agent ID (Preview)</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--defender)">&rarr;</span> Agent inventory and runtime telemetry can be queried in Defender XDR (AIAgentsInfo preview + CloudAppEvents) when Agent 365 connectors are enabled</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&rarr;</span> Agent identity context is used by Entra Agent ID and Conditional Access for Agent ID (preview) where enabled</div>
             <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&rarr;</span> Agent prompt/response activity to Purview DSPM &amp; DLP for AI</div>
           </fluent-card>
           <fluent-card class="sig-col">
