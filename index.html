@@ -562,9 +562,9 @@
     </a>
     <div class="nav-links">
       <fluent-anchor href="#top" appearance="stealth">Overview</fluent-anchor>
-      <fluent-anchor href="#diagramSection" appearance="stealth">Pillars</fluent-anchor>
-      <fluent-anchor href="#diagramSection" appearance="stealth">Scenarios</fluent-anchor>
-      <fluent-anchor href="#diagramSection" appearance="stealth">Roadmap</fluent-anchor>
+      <fluent-anchor href="#diagramSection" appearance="stealth" data-nav="pillars">Pillars</fluent-anchor>
+      <fluent-anchor href="#diagramSection" appearance="stealth" data-nav="scenarios">Scenarios</fluent-anchor>
+      <fluent-anchor href="#diagramSection" appearance="stealth" data-nav="roadmap">Roadmap</fluent-anchor>
       <fluent-anchor class="repo-link" href="https://github.com/chashea/ai-security" target="_blank" rel="noopener" appearance="hypertext">GitHub &#x2197;</fluent-anchor>
     </div>
   </div>
@@ -1328,6 +1328,25 @@
   document.addEventListener('click', e => {
     // Fluent button doesn't bubble like a normal button; use composedPath
     const path = e.composedPath ? e.composedPath() : [];
+
+    // Top-nav anchor handling (Pillars / Scenarios / Roadmap)
+    const navEl = path.find && path.find(el => el.getAttribute && el.getAttribute('data-nav'));
+    if (navEl) {
+      const navTarget = navEl.getAttribute('data-nav');
+      e.preventDefault();
+      if (navTarget === 'pillars') {
+        clearSelection();
+      } else if (navTarget === 'scenarios' || navTarget === 'roadmap') {
+        selectNode('hub');
+        const hubPanel = document.querySelector('.detail-panel[data-detail="hub"]');
+        const tabs = hubPanel && hubPanel.querySelector('fluent-tabs');
+        const tabId = navTarget === 'scenarios' ? 'threats' : 'roadmap';
+        if (tabs) tabs.setAttribute('activeid', tabId);
+      }
+      setTimeout(() => { section.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+      return;
+    }
+
     const isBack = path.some(el => el.classList && el.classList.contains('detail-back'))
                    || (e.target.closest && e.target.closest('.detail-back'));
     if (isBack) { clearSelection(); return; }
