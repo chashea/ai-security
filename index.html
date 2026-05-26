@@ -316,21 +316,6 @@
     display: flex; align-items: center; gap: var(--sp-8); flex-wrap: wrap;
     color: var(--neutral-foreground-rest);
   }
-  fluent-card.pc[data-release="PREVIEW"] h4::after {
-    content: 'Preview';
-    margin-left: auto;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    padding: 3px 8px;
-    border-radius: 999px;
-    border: 1px solid transparent;
-    text-transform: none;
-    color: #f3bf64;
-    background: rgba(243, 191, 100, 0.14);
-    border-color: rgba(243, 191, 100, 0.28);
-  }
   fluent-card.pc p {
     font-size: 14px; line-height: 1.6;
     color: var(--neutral-foreground-hint, #cfcfcf);
@@ -382,23 +367,6 @@
     border-bottom: 1px solid rgba(255,255,255,0.06);
     display: flex; align-items: flex-start; gap: var(--sp-8);
     line-height: 1.5;
-  }
-  .sig-item[data-release="PREVIEW"]::after {
-    content: 'Preview';
-    margin-left: auto;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    padding: 3px 8px;
-    border-radius: 999px;
-    border: 1px solid transparent;
-    text-transform: none;
-    line-height: 1.1;
-    flex-shrink: 0;
-    color: #f3bf64;
-    background: rgba(243, 191, 100, 0.14);
-    border-color: rgba(243, 191, 100, 0.28);
   }
   .sig-item:last-child { border-bottom: none; }
   .sig-arrow {
@@ -746,7 +714,7 @@
           <fluent-card class="sig-col">
             <h5>Signals Received &larr;</h5>
             <div class="sig-item"><span class="sig-arrow" style="color:var(--defender)">&larr;</span> Confirmed-compromise risk feedback from Defender XDR / Defender for Identity</div>
-            <div class="sig-item" data-release="PREVIEW"><span class="sig-arrow" style="color:var(--purview)">&larr;</span> Adaptive Protection risk levels from Purview Insider Risk (CA condition, Preview)</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&larr;</span> Adaptive Protection risk levels from Purview Insider Risk (CA condition, Preview)</div>
             <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&larr;</span> Sensitivity-label-driven authentication contexts (SharePoint / Teams) evaluated by CA</div>
           </fluent-card>
         </div>
@@ -766,7 +734,7 @@
     <fluent-tab id="sig">Signal Flow</fluent-tab>
     <fluent-tab-panel id="capPanel">
         <div class="pgrid">
-          <fluent-card class="pc" data-release="PREVIEW">
+          <fluent-card class="pc">
             <h4>AI Security Posture (CSPM) <fluent-badge appearance="neutral" class="cap-badge" style="--bcolor:var(--dfc)">Posture</fluent-badge></h4>
             <p>Cloud Security Graph continuously discovers AI workloads across Azure OpenAI Service, Azure AI Foundry, and Azure Machine Learning &mdash; plus Amazon Bedrock and Google Vertex AI on the multi-cloud side (with Azure AI Foundry Agents and Copilot Studio Agents in preview). MCSB-aligned recommendations (Private Link, restrict network access, disable local auth, diagnostic logs) feed Secure Score; preview Foundry/agent-specific recommendations are surfaced but don&rsquo;t yet count toward Secure Score.</p>
             <span class="tech">Plan: Defender CSPM // Multicloud: Azure + AWS + GCP</span>
@@ -999,7 +967,7 @@
             <span class="tech">Protocols: MCP, A2A // Frameworks: Copilot Studio + custom + 3P</span>
             <div class="tl"><span>MCP support</span><span>A2A messaging</span><span>Framework-agnostic</span></div>
           </fluent-card>
-          <fluent-card class="pc" data-release="PREVIEW">
+          <fluent-card class="pc">
             <h4>Agent Security <fluent-badge appearance="neutral" class="cap-badge" style="--bcolor:var(--accent-red)">Threat Detection</fluent-badge></h4>
             <p>Agent activity flows into Defender XDR as a first-class signal type alongside identity, endpoint, and cloud. Detections for agent impersonation, anomalous tool invocation, prompt injection on agent inputs, and data exfiltration via agent. Purview DSPM for AI extends to agent data interactions.</p>
             <span class="tech">XDR table: CloudAppEvents + AIAgentsInfo (Preview) // Purview: DSPM for AI agents</span>
@@ -1017,8 +985,8 @@
         <div class="sig-grid">
           <fluent-card class="sig-col">
             <h5>Signals Sent &rarr;</h5>
-            <div class="sig-item" data-release="PREVIEW"><span class="sig-arrow" style="color:var(--defender)">&rarr;</span> Agent inventory &amp; runtime telemetry to Defender XDR (AIAgentsInfo Preview + CloudAppEvents)</div>
-            <div class="sig-item" data-release="PREVIEW"><span class="sig-arrow" style="color:var(--entra)">&rarr;</span> Agent identity context to Entra for Conditional Access for Agent ID (Preview)</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--defender)">&rarr;</span> Agent inventory &amp; runtime telemetry to Defender XDR (AIAgentsInfo Preview + CloudAppEvents)</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&rarr;</span> Agent identity context to Entra for Conditional Access for Agent ID (Preview)</div>
             <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&rarr;</span> Agent prompt/response activity to Purview DSPM &amp; DLP for AI</div>
           </fluent-card>
           <fluent-card class="sig-col">
