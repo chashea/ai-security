@@ -562,7 +562,6 @@
     </a>
     <div class="nav-links">
       <fluent-anchor href="#top" appearance="stealth">Overview</fluent-anchor>
-      <fluent-anchor href="#diagramSection" appearance="stealth" data-nav="pillars">Pillars</fluent-anchor>
       <fluent-anchor href="#diagramSection" appearance="stealth" data-nav="scenarios">Scenarios</fluent-anchor>
       <fluent-anchor href="#diagramSection" appearance="stealth" data-nav="roadmap">Roadmap</fluent-anchor>
       <fluent-anchor class="repo-link" href="https://github.com/chashea/ai-security" target="_blank" rel="noopener" appearance="hypertext">GitHub &#x2197;</fluent-anchor>
@@ -1334,9 +1333,7 @@
     if (navEl) {
       const navTarget = navEl.getAttribute('data-nav');
       e.preventDefault();
-      if (navTarget === 'pillars') {
-        clearSelection();
-      } else if (navTarget === 'scenarios' || navTarget === 'roadmap') {
+      if (navTarget === 'scenarios' || navTarget === 'roadmap') {
         selectNode('hub');
         const hubPanel = document.querySelector('.detail-panel[data-detail="hub"]');
         const tabs = hubPanel && hubPanel.querySelector('fluent-tabs');
