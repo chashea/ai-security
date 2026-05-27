@@ -303,17 +303,12 @@
     border: 1px solid var(--neutral-stroke-divider-rest, #3d3d3d);
     transition: border-color .2s, transform .2s, box-shadow .2s, background .2s;
     display: block;
-    cursor: pointer;
   }
   fluent-card.pc:hover {
     border-color: var(--neutral-stroke-rest, #525252);
     background: var(--neutral-layer-floating, #3a3a3a);
     transform: translateY(-1px);
     box-shadow: 0 4px 16px rgba(0,0,0,0.32);
-  }
-  fluent-card.pc:focus-visible {
-    outline: 2px solid var(--accent-fill-rest, #5b8def);
-    outline-offset: 2px;
   }
   fluent-card.pc h4 {
     font-size: 15px; font-weight: 600; letter-spacing: -0.01em;
@@ -338,46 +333,6 @@
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(255,255,255,0.06);
     color: var(--neutral-foreground-hint);
-  }
-
-  /* Capability card popout */
-  .card-popout-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.62);
-    backdrop-filter: blur(2px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--sp-24);
-    z-index: 9999;
-  }
-  .card-popout-backdrop[hidden] { display: none; }
-  .card-popout {
-    width: min(960px, 100%);
-    max-height: 88vh;
-    overflow: auto;
-    position: relative;
-  }
-  .card-popout-close {
-    position: absolute;
-    top: var(--sp-12);
-    right: var(--sp-12);
-    z-index: 2;
-  }
-  .card-popout-card-host fluent-card.pc {
-    display: block;
-    min-height: 100%;
-    padding: 36px var(--sp-24) var(--sp-24);
-    background: var(--neutral-layer-floating, #1f1f1f);
-    border: 1px solid var(--neutral-stroke-divider-rest, #3d3d3d);
-    box-shadow: 0 14px 44px rgba(0,0,0,0.45);
-    border-radius: 12px;
-    transform: none;
-    cursor: default;
-  }
-  .card-popout-card-host fluent-card.pc:hover {
-    transform: none;
   }
 
   /* In-card "type" badges */
@@ -1345,18 +1300,9 @@
   </footer>
 </div>
 
-<div class="card-popout-backdrop" id="cardPopoutBackdrop" hidden>
-  <div class="card-popout" role="dialog" aria-modal="true" aria-label="Expanded solution card">
-    <fluent-button id="cardPopoutClose" class="card-popout-close" appearance="outline" aria-label="Close detail">&times; Close</fluent-button>
-    <div class="card-popout-card-host" id="cardPopoutCardHost"></div>
-  </div>
-</div>
-
 <script>
   const container = document.getElementById('archDiagram');
   const section = document.getElementById('diagramSection');
-  const cardPopoutBackdrop = document.getElementById('cardPopoutBackdrop');
-  const cardPopoutCardHost = document.getElementById('cardPopoutCardHost');
   let activeNode = null;
 
   function clearSelection() {
@@ -1415,43 +1361,9 @@
     }
   }
 
-  function openCardPopout(cardEl) {
-    if (!cardPopoutBackdrop || !cardPopoutCardHost) return;
-    const clonedCard = cardEl.cloneNode(true);
-    clonedCard.removeAttribute('tabindex');
-    clonedCard.removeAttribute('role');
-    clonedCard.removeAttribute('aria-haspopup');
-    clonedCard.removeAttribute('aria-label');
-    cardPopoutCardHost.replaceChildren(clonedCard);
-    cardPopoutBackdrop.hidden = false;
-  }
-
-  function closeCardPopout() {
-    if (!cardPopoutBackdrop) return;
-    cardPopoutBackdrop.hidden = true;
-    if (cardPopoutCardHost) cardPopoutCardHost.replaceChildren();
-  }
-
-  document.querySelectorAll('fluent-card.pc').forEach(card => {
-    card.tabIndex = 0;
-    card.setAttribute('role', 'button');
-    card.setAttribute('aria-haspopup', 'dialog');
-    card.setAttribute('aria-label', `View expanded technical detail: ${card.querySelector('h4')?.textContent?.trim() || 'capability card'}`);
-  });
-
   document.addEventListener('click', e => {
     // Fluent button doesn't bubble like a normal button; use composedPath
     const path = e.composedPath ? e.composedPath() : [];
-
-    const inPopout = path.some(el => el.classList && el.classList.contains('card-popout'));
-    const clickedClose = path.some(el => el.id === 'cardPopoutClose');
-    if (cardPopoutBackdrop && !cardPopoutBackdrop.hidden) {
-      if (e.target === cardPopoutBackdrop || clickedClose) { closeCardPopout(); return; }
-      if (inPopout) return;
-    }
-
-    const cardEl = path.find(el => el.tagName && el.tagName.toLowerCase() === 'fluent-card' && el.classList && el.classList.contains('pc'));
-    if (cardEl) { openCardPopout(cardEl); return; }
 
     // Top-nav anchor handling (Pillars / Scenarios / Roadmap)
     const navEl = path.find && path.find(el => el.getAttribute && el.getAttribute('data-nav'));
@@ -1485,19 +1397,6 @@
     const inPanel = path.some(el => el.classList && (el.classList.contains('detail-panel') || el.classList.contains('arch-svg-container')));
     if (!inPanel && !(e.target.closest && (e.target.closest('.detail-panel') || e.target.closest('.arch-svg-container')))) {
       clearSelection();
-    }
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && cardPopoutBackdrop && !cardPopoutBackdrop.hidden) {
-      closeCardPopout();
-      return;
-    }
-    const activeCard = document.activeElement;
-    if (!activeCard || !activeCard.matches || !activeCard.matches('fluent-card.pc')) return;
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      openCardPopout(activeCard);
     }
   });
 
