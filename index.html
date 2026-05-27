@@ -354,61 +354,30 @@
   }
   .card-popout-backdrop[hidden] { display: none; }
   .card-popout {
-    width: min(820px, 100%);
+    width: min(960px, 100%);
     max-height: 88vh;
     overflow: auto;
-    border-radius: 12px;
+    position: relative;
+  }
+  .card-popout-close {
+    position: absolute;
+    top: var(--sp-12);
+    right: var(--sp-12);
+    z-index: 2;
+  }
+  .card-popout-card-host fluent-card.pc {
+    display: block;
+    min-height: 100%;
+    padding: 36px var(--sp-24) var(--sp-24);
     background: var(--neutral-layer-floating, #1f1f1f);
     border: 1px solid var(--neutral-stroke-divider-rest, #3d3d3d);
     box-shadow: 0 14px 44px rgba(0,0,0,0.45);
-    padding: var(--sp-24);
+    border-radius: 12px;
+    transform: none;
+    cursor: default;
   }
-  .card-popout-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: var(--sp-16);
-    margin-bottom: var(--sp-16);
-  }
-  .card-popout h4 {
-    margin: 0;
-    font-size: 20px;
-    letter-spacing: -0.01em;
-  }
-  .card-popout-section {
-    margin-top: var(--sp-16);
-    padding-top: var(--sp-16);
-    border-top: 1px solid rgba(255,255,255,0.08);
-  }
-  .card-popout-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--neutral-foreground-hint, #cfcfcf);
-    margin: 0 0 var(--sp-8);
-  }
-  .card-popout-copy {
-    margin: 0;
-    line-height: 1.7;
-    color: var(--neutral-foreground-rest, #f5f5f5);
-  }
-  .card-popout-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-8);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .card-popout-list li {
-    font-family: var(--font-mono);
-    font-size: 11.5px;
-    padding: 5px 9px;
-    border-radius: 6px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    color: var(--neutral-foreground-hint, #d7d7d7);
+  .card-popout-card-host fluent-card.pc:hover {
+    transform: none;
   }
 
   /* In-card "type" badges */
@@ -1377,23 +1346,9 @@
 </div>
 
 <div class="card-popout-backdrop" id="cardPopoutBackdrop" hidden>
-  <div class="card-popout" role="dialog" aria-modal="true" aria-labelledby="cardPopoutTitle">
-    <div class="card-popout-top">
-      <h4 id="cardPopoutTitle"></h4>
-      <fluent-button id="cardPopoutClose" appearance="outline" aria-label="Close detail">&times; Close</fluent-button>
-    </div>
-    <div class="card-popout-section">
-      <div class="card-popout-label">Overview</div>
-      <p class="card-popout-copy" id="cardPopoutOverview"></p>
-    </div>
-    <div class="card-popout-section">
-      <div class="card-popout-label">Technical detail</div>
-      <p class="card-popout-copy" id="cardPopoutTech"></p>
-    </div>
-    <div class="card-popout-section">
-      <div class="card-popout-label">Signals and controls</div>
-      <ul class="card-popout-list" id="cardPopoutTags"></ul>
-    </div>
+  <div class="card-popout" role="dialog" aria-modal="true" aria-label="Expanded solution card">
+    <fluent-button id="cardPopoutClose" class="card-popout-close" appearance="outline" aria-label="Close detail">&times; Close</fluent-button>
+    <div class="card-popout-card-host" id="cardPopoutCardHost"></div>
   </div>
 </div>
 
@@ -1401,10 +1356,7 @@
   const container = document.getElementById('archDiagram');
   const section = document.getElementById('diagramSection');
   const cardPopoutBackdrop = document.getElementById('cardPopoutBackdrop');
-  const cardPopoutTitle = document.getElementById('cardPopoutTitle');
-  const cardPopoutOverview = document.getElementById('cardPopoutOverview');
-  const cardPopoutTech = document.getElementById('cardPopoutTech');
-  const cardPopoutTags = document.getElementById('cardPopoutTags');
+  const cardPopoutCardHost = document.getElementById('cardPopoutCardHost');
   let activeNode = null;
 
   function clearSelection() {
@@ -1464,23 +1416,20 @@
   }
 
   function openCardPopout(cardEl) {
-    if (!cardPopoutBackdrop) return;
-    const title = cardEl.querySelector('h4');
-    const overview = cardEl.querySelector('p');
-    const tech = cardEl.querySelector('.tech');
-    const tags = Array.from(cardEl.querySelectorAll('.tl span')).map(el => el.textContent.trim()).filter(Boolean);
-
-    cardPopoutTitle.textContent = title ? title.textContent.replace(/\s+/g, ' ').trim() : 'Capability detail';
-    cardPopoutOverview.textContent = overview ? overview.textContent.trim() : 'No overview is available for this capability.';
-    cardPopoutTech.textContent = tech ? tech.textContent.trim() : 'No additional technical metadata is available for this capability.';
-    cardPopoutTags.innerHTML = tags.map(tag => `<li>${tag}</li>`).join('') || '<li>No additional controls listed.</li>';
-
+    if (!cardPopoutBackdrop || !cardPopoutCardHost) return;
+    const clonedCard = cardEl.cloneNode(true);
+    clonedCard.removeAttribute('tabindex');
+    clonedCard.removeAttribute('role');
+    clonedCard.removeAttribute('aria-haspopup');
+    clonedCard.removeAttribute('aria-label');
+    cardPopoutCardHost.replaceChildren(clonedCard);
     cardPopoutBackdrop.hidden = false;
   }
 
   function closeCardPopout() {
     if (!cardPopoutBackdrop) return;
     cardPopoutBackdrop.hidden = true;
+    if (cardPopoutCardHost) cardPopoutCardHost.replaceChildren();
   }
 
   document.querySelectorAll('fluent-card.pc').forEach(card => {
