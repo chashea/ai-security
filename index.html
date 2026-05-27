@@ -1209,6 +1209,46 @@
             </div>
           </div>
   </fluent-accordion-item>
+  <fluent-accordion-item class="scenario-item">
+    <div class="sc-accent" style="background:linear-gradient(180deg,var(--defender),var(--entra));" slot="start"></div>
+    <span slot="heading" class="sc-heading">
+      <fluent-badge appearance="neutral" class="sc-sev" style="--bcolor:var(--accent-red)">CRITICAL</fluent-badge>
+      <span class="sc-title">Compromised Endpoint Device Accessing Copilot</span>
+    </span>
+    <div class="sc-desc">An employee laptop is compromised via a malicious browser extension that exfiltrates session cookies and silently relays Microsoft 365 Copilot prompts and responses &mdash; including grounded sensitive data &mdash; to an attacker-controlled endpoint</div>
+    <div class="sc-body">
+            <div class="stepper">
+              <div class="step">
+                <div class="step-dot"><div class="step-dot-inner" style="background:var(--defender);"></div></div>
+                <div class="step-num">STEP 1</div>
+                <div class="step-label">Device Compromise Detected</div>
+                <div class="step-product" style="background:rgba(59,130,246,0.1);color:var(--defender);">Defender for Endpoint</div>
+                <div class="step-detail">MDE EDR flags the malicious browser extension behavior &mdash; cookie theft, unsigned process injection, beaconing to a low-reputation domain. Device risk level escalates to High and an alert fires with full process tree.</div>
+              </div>
+              <div class="step">
+                <div class="step-dot"><div class="step-dot-inner" style="background:var(--entra);"></div></div>
+                <div class="step-num">STEP 2</div>
+                <div class="step-label">Compliance Flipped &amp; Access Blocked</div>
+                <div class="step-product" style="background:rgba(139,92,246,0.1);color:var(--entra);">Intune + Entra CA</div>
+                <div class="step-detail">Intune consumes the MDE risk signal and marks the device non-compliant. Entra Conditional Access for AI apps requires compliant device &mdash; Copilot and Foundry access are blocked, and CAE revokes existing tokens within minutes.</div>
+              </div>
+              <div class="step">
+                <div class="step-dot"><div class="step-dot-inner" style="background:var(--purview);"></div></div>
+                <div class="step-num">STEP 3</div>
+                <div class="step-label">Data Exposure Assessed</div>
+                <div class="step-product" style="background:rgba(6,182,212,0.1);color:var(--purview);">Purview DSPM for AI</div>
+                <div class="step-detail">DSPM for AI replays the user's recent Copilot interactions, surfaces which sensitivity labels and SITs were returned in grounded responses, and Insider Risk raises a potential data theft case scoped to that user and device.</div>
+              </div>
+              <div class="step">
+                <div class="step-dot"><div class="step-dot-inner" style="background:var(--defender);"></div></div>
+                <div class="step-num">STEP 4</div>
+                <div class="step-label">Incident Correlated &amp; Contained</div>
+                <div class="step-product" style="background:rgba(59,130,246,0.1);color:var(--defender);">Defender XDR</div>
+                <div class="step-detail">XDR joins the MDE alert, CA block events, Copilot interaction telemetry, and Insider Risk signal into one incident. Automated Investigation &amp; Response isolates the device, kills the extension, and Security Copilot drafts the user/manager notification.</div>
+              </div>
+            </div>
+          </div>
+  </fluent-accordion-item>
 </fluent-accordion>
     </fluent-tab-panel>
     <fluent-tab-panel id="roadmapPanel">
