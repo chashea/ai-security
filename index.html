@@ -590,7 +590,7 @@
 
     <div class="arch-svg-container" id="archDiagram">
 <svg viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg">
-        <!-- Pentagon outer connections: 10 pairs -->
+        <!-- Pentagon outer connections: 8 pairs -->
         <line class="arch-line" data-from="entra" data-to="defender" x1="350" y1="80" x2="516" y2="186" stroke="var(--entra)" stroke-width="2"/>
         <line class="arch-line" data-from="entra" data-to="dfc" x1="350" y1="80" x2="184" y2="186" stroke="var(--entra)" stroke-width="2"/>
         <line class="arch-line" data-from="entra" data-to="purview" x1="350" y1="80" x2="453" y2="382" stroke="var(--purview)" stroke-width="2"/>
@@ -598,8 +598,6 @@
         <line class="arch-line" data-from="defender" data-to="purview" x1="516" y1="186" x2="453" y2="382" stroke="var(--defender)" stroke-width="2"/>
         <line class="arch-line" data-from="defender" data-to="agent" x1="516" y1="186" x2="247" y2="382" stroke="var(--defender)" stroke-width="2"/>
         <line class="arch-line" data-from="defender" data-to="dfc" x1="516" y1="186" x2="184" y2="186" stroke="var(--defender)" stroke-width="2"/>
-        <line class="arch-line" data-from="dfc" data-to="purview" x1="184" y1="186" x2="453" y2="382" stroke="var(--dfc)" stroke-width="2"/>
-        <line class="arch-line" data-from="dfc" data-to="agent" x1="184" y1="186" x2="247" y2="382" stroke="var(--dfc)" stroke-width="2"/>
         <line class="arch-line" data-from="purview" data-to="agent" x1="453" y1="382" x2="247" y2="382" stroke="var(--agent)" stroke-width="2"/>
 
         <!-- Hub spokes -->
@@ -785,7 +783,6 @@
             <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&larr;</span> Identity context joins DfC alerts via the Defender XDR unified incident</div>
             <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&larr;</span> Service principal inventory and permission context from Entra used in Defender for Cloud attack-path analysis</div>
             <div class="sig-item"><span class="sig-arrow" style="color:var(--defender)">&larr;</span> Incident response actions from Defender XDR for compute isolation (Defender for Servers)</div>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&larr;</span> Defender XDR incident context can include Purview DLP and Insider Risk signals alongside DfC alerts</div>
           </fluent-card>
         </div>
       </fluent-tab-panel>
