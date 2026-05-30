@@ -873,21 +873,21 @@
         <div class="pgrid">
           <fluent-card class="pc">
             <h4>Apps &amp; Agents (DSPM for AI) <fluent-badge appearance="neutral" class="cap-badge" style="--bcolor:var(--purview)">Observability</fluent-badge></h4>
-            <p>The Apps &amp; Agents view inside DSPM for AI inventories every AI app and agent in use &mdash; Copilot, Copilot agents, and third-party Generative AI sites &mdash; with usage trends, sensitive interaction counts, and per-app risk signals fed from Defender for Cloud Apps. Activity Explorer surfaces prompt/response telemetry, sensitivity labels touched, and policy matches.</p>
-            <span class="tech">Portal: purview.microsoft.com &rarr; Solutions &rarr; DSPM for AI // Source: MDCA Cloud Discovery + Purview browser extension</span>
-            <div class="tl"><span>Apps &amp; Agents inventory</span><span>Activity Explorer</span><span>One-click policies</span></div>
+            <p>The Apps &amp; Agents view inside DSPM for AI helps inventory supported AI apps and agents &mdash; including Microsoft 365 Copilot, Copilot agents, and third-party generative AI sites discovered through Defender for Cloud Apps. It highlights risky AI usage, sensitive data exposure, and remediation recommendations from supported Purview and Defender signals.</p>
+            <span class="tech">Portal: purview.microsoft.com &rarr; Solutions &rarr; DSPM for AI // Source: MDCA discovery + supported Purview signals</span>
+            <div class="tl"><span>Apps &amp; Agents inventory</span><span>Risk indicators</span><span>Remediation recommendations</span></div>
           </fluent-card>
           <fluent-card class="pc">
             <h4>DLP for AI Interactions <fluent-badge appearance="neutral" class="cap-badge" style="--bcolor:var(--accent-red)">Enforcement</fluent-badge></h4>
-            <p>Two policy types at the Copilot boundary: (1) block Copilot from returning responses when prompts contain sensitive info types (SSN, credit card, medical terms), and (2) exclude files and emails with specified sensitivity labels from being summarized or used as grounding. Browser DLP on managed endpoints and MDCA session proxies extend coverage to third-party Generative AI sites.</p>
-            <span class="tech">Locations: Microsoft 365 Copilot, Devices, Defender for Cloud Apps // Action: block + policy tip</span>
-            <div class="tl"><span>Block sensitive prompts</span><span>Exclude labeled grounding</span><span>Endpoint + MDCA coverage</span></div>
+            <p>Purview DLP can apply controls to Microsoft 365 Copilot and supported endpoints to reduce risky AI interactions, such as prompts containing sensitive information or use of labeled content where policy excludes it from Copilot processing. Browser DLP on managed endpoints and MDCA session controls can extend protection to supported third-party generative AI sites.</p>
+            <span class="tech">Locations: Microsoft 365 Copilot, Devices, Defender for Cloud Apps // Actions depend on policy and workload support</span>
+            <div class="tl"><span>Sensitive prompt controls</span><span>Label-aware exclusions</span><span>Endpoint + MDCA coverage</span></div>
           </fluent-card>
           <fluent-card class="pc">
             <h4>Sensitivity Labels &amp; Auto-Labeling <fluent-badge appearance="neutral" class="cap-badge" style="--bcolor:var(--dfc)">Classification</fluent-badge></h4>
-            <p>Sensitivity labels persist through the Copilot pipeline &mdash; labeled SharePoint and OneDrive files retain classification and encryption when used for grounding, and Copilot-generated content inherits the highest-priority label from its source material. Auto-labeling policies (SIT-based or trainable classifier&ndash;based) apply labels at rest in SharePoint/OneDrive and inline in Office apps. AES-256 encryption via Azure Rights Management.</p>
-            <span class="tech">SensitivityLabelId surfaced in Copilot audit AccessedResources // Encryption: AES-256 via Azure RMS</span>
-            <div class="tl"><span>Label inheritance in Copilot</span><span>Auto-label: SIT + classifier</span><span>Highest-priority label wins</span></div>
+            <p>Microsoft 365 Copilot respects existing Microsoft 365 permissions and Purview sensitivity labels on source content. Labeled SharePoint and OneDrive files keep their classification and protection at rest, and supported Office experiences can apply labels to generated content based on policy. Auto-labeling policies can classify content using sensitive information types and trainable classifiers.</p>
+            <span class="tech">Copilot honors source permissions and labels // Auto-labeling: SIT + trainable classifier support</span>
+            <div class="tl"><span>Label-aware Copilot controls</span><span>Auto-label: SIT + classifier</span><span>Permission-trimmed grounding</span></div>
           </fluent-card>
           <fluent-card class="pc">
             <h4>Data Risk Assessments (DSPM) <fluent-badge appearance="neutral" class="cap-badge" style="--bcolor:var(--purview)">Posture</fluent-badge></h4>
@@ -897,9 +897,9 @@
           </fluent-card>
           <fluent-card class="pc">
             <h4>Insider Risk Management <fluent-badge appearance="neutral" class="cap-badge" style="--bcolor:var(--accent-orange)">Behavioral</fluent-badge></h4>
-            <p>The "Risky AI usage" policy template surfaces indicators for risky prompts containing sensitive info, sensitive responses in AI apps, and risky prompts containing harmful content. ML models correlate with HR signals (departure date, PIP). Adaptive protection auto-escalates DLP policy scope.</p>
-            <span class="tech">Template: Risky AI usage // HR connector: termination, PIP dates</span>
-            <div class="tl"><span>Risky prompt indicators</span><span>Sensitive response indicators</span><span>HR connector integration</span></div>
+            <p>The "Risky AI usage" policy template surfaces indicators for risky prompts containing sensitive information, sensitive responses in AI apps, and prompts containing harmful content. If HR connectors and Adaptive Protection are configured, those signals can help tune risk levels and DLP policy scope.</p>
+            <span class="tech">Template: Risky AI usage // Optional enrichment: HR connectors + Adaptive Protection</span>
+            <div class="tl"><span>Risky prompt indicators</span><span>Sensitive response indicators</span><span>Optional HR enrichment</span></div>
           </fluent-card>
           <fluent-card class="pc">
             <h4>Audit &amp; eDiscovery <fluent-badge appearance="neutral" class="cap-badge" style="--bcolor:var(--entra)">Compliance</fluent-badge></h4>
@@ -933,7 +933,7 @@
     <fluent-button class="detail-back" appearance="outline">&larr; Diagram</fluent-button>
     <span class="dh-dot" style="background:var(--agent)"></span>
     <h3 style="color:var(--agent)">Microsoft Agent 365</h3>
-    <span class="dh-sub">Control Plane for AI Agents</span>
+    <span class="dh-sub">Governance for Supported AI Agents</span>
   </div>
   <fluent-tabs class="dp-tabs" activeid="cap">
     <fluent-tab id="cap">Capabilities</fluent-tab>
@@ -942,39 +942,39 @@
         <div class="pgrid">
           <fluent-card class="pc">
             <h4>Agent Registry <fluent-badge appearance="neutral" class="cap-badge" style="--bcolor:var(--agent)">Inventory</fluent-badge></h4>
-            <p>Central registry of every AI agent across the org &mdash; built in Copilot Studio, custom code, or acquired from partners. Each agent receives a unique Agent ID (Entra-issued workload identity) with metadata: owner, purpose, data sources, tools invoked, and operating environment.</p>
-            <span class="tech">Surface: Microsoft 365 Admin Center // Identity: Entra Agent ID</span>
-            <div class="tl"><span>Built + bought agents</span><span>Owner attribution</span><span>Lifecycle metadata</span></div>
+            <p>Central inventory for supported AI agents across the organization, including agents built in Microsoft tools and connected partner ecosystems where supported. Agent records can include owner, purpose, lifecycle state, data sources, tools, and operating environment so administrators can govern usage consistently.</p>
+            <span class="tech">Surface: Microsoft 365 admin experiences // Identity: Entra Agent ID where supported</span>
+            <div class="tl"><span>Supported agent inventory</span><span>Owner attribution</span><span>Lifecycle metadata</span></div>
           </fluent-card>
           <fluent-card class="pc">
             <h4>Access Control <fluent-badge appearance="neutral" class="cap-badge" style="--bcolor:var(--entra)">Identity</fluent-badge></h4>
-            <p>Conditional Access policies for agents: just-enough-permissions on data sources, tools, and downstream agents. Role-based access scoping per agent. Federated credentials via OIDC eliminate stored secrets. Permission Creep Index applied to agent identities the same way it is to human users.</p>
-            <span class="tech">Policy: Entra CA for workloadIdentities // OIDC federated credentials</span>
-            <div class="tl"><span>Per-agent CA policies</span><span>Just-enough-permissions</span><span>Federated credentials</span></div>
+            <p>Use Entra Agent ID, workload identities, federated credentials, and least-privilege permissions to scope what supported agents can access. Conditional Access for workload identities and Identity Governance controls can help reduce credential exposure and permission creep where those controls apply.</p>
+            <span class="tech">Policy: Entra workload identities // OIDC federated credentials // Least privilege</span>
+            <div class="tl"><span>Workload identity controls</span><span>Just-enough-permissions</span><span>Federated credentials</span></div>
           </fluent-card>
           <fluent-card class="pc">
             <h4>Agent Visualization <fluent-badge appearance="neutral" class="cap-badge" style="--bcolor:var(--agent)">Graph</fluent-badge></h4>
-            <p>Interactive graph view of agent topology: agent-to-agent invocation chains, agent-to-data-source bindings, tool dependencies, and human-to-agent handoffs. Surfaces blast radius for any compromised agent and identifies orphaned or duplicative agents for cleanup.</p>
-            <span class="tech">Visualization: Admin Center agent graph // Blast radius scoring</span>
-            <div class="tl"><span>Topology graph</span><span>Invocation chains</span><span>Orphan detection</span></div>
+            <p>Agent relationship views can help administrators understand supported agent connections to people, data, tools, and other agents. Use topology and ownership context to review blast radius, find stale agents, and prioritize access reviews.</p>
+            <span class="tech">Visualization: supported admin center graph views // Review: ownership + access paths</span>
+            <div class="tl"><span>Topology context</span><span>Data/tool bindings</span><span>Access review candidates</span></div>
           </fluent-card>
           <fluent-card class="pc">
             <h4>Interoperability <fluent-badge appearance="neutral" class="cap-badge" style="--bcolor:var(--purview)">Open Standards</fluent-badge></h4>
-            <p>Native support for Model Context Protocol (MCP) and Agent-to-Agent (A2A) standards. Agents built in any framework (Copilot Studio, LangChain, Semantic Kernel, third-party) can register, communicate, and be governed through a single control plane. Cross-platform agent orchestration.</p>
-            <span class="tech">Protocols: MCP, A2A // Frameworks: Copilot Studio + custom + 3P</span>
-            <div class="tl"><span>MCP support</span><span>A2A messaging</span><span>Framework-agnostic</span></div>
+            <p>Microsoft is moving toward standards-based agent interoperability, including MCP and agent-to-agent patterns. Treat non-Microsoft framework governance as connector- and capability-dependent: register and govern agents through supported integration paths rather than assuming universal coverage.</p>
+            <span class="tech">Protocols: MCP + agent-to-agent patterns // Coverage depends on supported connectors</span>
+            <div class="tl"><span>Standards alignment</span><span>Connector-based integration</span><span>Framework-aware governance</span></div>
           </fluent-card>
           <fluent-card class="pc">
             <h4>Agent Security <fluent-badge appearance="neutral" class="cap-badge" style="--bcolor:var(--accent-red)">Threat Detection</fluent-badge></h4>
-            <p>Agent activity flows into Defender XDR as a first-class signal type alongside identity, endpoint, and cloud. Detections for agent impersonation, anomalous tool invocation, prompt injection on agent inputs, and data exfiltration via agent. Purview DSPM for AI extends to agent data interactions.</p>
-            <span class="tech">XDR table: CloudAppEvents + AIAgentsInfo (Preview) // Purview: DSPM for AI agents</span>
-            <div class="tl"><span>Defender XDR signal</span><span>Agent impersonation alerts</span><span>DSPM coverage</span></div>
+            <p>Agent activity can contribute to security investigations through supported Defender, Purview, and Entra signals. Detections and coverage vary by agent platform and connector, so validate which activities are logged before relying on a scenario for detection engineering.</p>
+            <span class="tech">Sources: supported Defender XDR, Purview, Entra, and agent-platform logs</span>
+            <div class="tl"><span>Supported XDR signals</span><span>Connector-dependent alerts</span><span>DSPM coverage where available</span></div>
           </fluent-card>
           <fluent-card class="pc">
             <h4>Admin Center Surface <fluent-badge appearance="neutral" class="cap-badge" style="--bcolor:var(--dfc)">Unified</fluent-badge></h4>
-            <p>Microsoft 365 Admin Center is the single pane of glass for agent lifecycle: provisioning, permissioning, monitoring, deprovisioning. Bulk operations, approval workflows for high-privilege agents, and quarterly access reviews tied to Entra Identity Governance.</p>
-            <span class="tech">Portal: admin.microsoft.com/agents // Governance: Entra access reviews</span>
-            <div class="tl"><span>Lifecycle management</span><span>Approval workflows</span><span>Quarterly reviews</span></div>
+            <p>Use Microsoft 365 admin and Entra governance surfaces to manage supported agent lifecycle tasks: review ownership, scope access, monitor usage, and deprovision stale agents. Pair this with periodic access reviews for high-privilege agent identities and data sources.</p>
+            <span class="tech">Portal: Microsoft 365 admin + Entra governance surfaces // Review: agent owners, identities, data access</span>
+            <div class="tl"><span>Lifecycle review</span><span>Access scoping</span><span>Periodic reviews</span></div>
           </fluent-card>
         </div>
       </fluent-tab-panel>
@@ -982,15 +982,15 @@
         <div class="sig-grid">
           <fluent-card class="sig-col">
             <h5>Signals Sent &rarr;</h5>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--defender)">&rarr;</span> Agent inventory and runtime telemetry can be queried in Defender XDR (AIAgentsInfo preview + CloudAppEvents) when Agent 365 connectors are enabled</div>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&rarr;</span> Agent identity context is used by Entra Agent ID and Conditional Access for Agent ID (preview) where enabled</div>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&rarr;</span> Agent prompt/response activity to Purview DSPM &amp; DLP for AI</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--defender)">&rarr;</span> Supported agent inventory, app activity, and alert data can enrich Defender XDR investigations where connectors emit those signals</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&rarr;</span> Agent identity context can inform Entra workload identity and Conditional Access controls where supported</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&rarr;</span> Supported agent and AI-app activity can inform Purview DSPM and DLP controls</div>
           </fluent-card>
           <fluent-card class="sig-col">
             <h5>Signals Received &larr;</h5>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&larr;</span> Agent ID issuance and federated credential lifecycle from Entra</div>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&larr;</span> Sensitivity-label propagation into agent data flows from Purview</div>
-            <div class="sig-item"><span class="sig-arrow" style="color:var(--defender)">&larr;</span> Threat alerts &amp; auto-investigation actions from Defender XDR</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--entra)">&larr;</span> Workload identity and federated credential lifecycle from Entra</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--purview)">&larr;</span> Sensitivity labels, DLP outcomes, and data-risk findings from Purview</div>
+            <div class="sig-item"><span class="sig-arrow" style="color:var(--defender)">&larr;</span> Threat alerts, incident context, and recommended response actions from Defender XDR</div>
           </fluent-card>
         </div>
       </fluent-tab-panel>
@@ -1037,7 +1037,7 @@
                 <div class="step-num">STEP 3</div>
                 <div class="step-label">Behavioral Anomaly</div>
                 <div class="step-product" style="background:rgba(6,182,212,0.1);color:var(--purview);">Insider Risk</div>
-                <div class="step-detail">Insider Risk Management detects repeated sensitive data copy events + off-hours AI usage. User risk score escalates. HR signals checked.</div>
+                <div class="step-detail">Insider Risk Management detects repeated sensitive data copy events + unusual AI usage. If HR connectors are configured, those signals can enrich the risk context.</div>
               </div>
               <div class="step">
                 <div class="step-dot"><div class="step-dot-inner" style="background:var(--defender);"></div></div>
@@ -1070,7 +1070,7 @@
                 <div class="step-num">STEP 2</div>
                 <div class="step-label">Threat Alert Fired</div>
                 <div class="step-product" style="background:rgba(16,185,129,0.1);color:var(--dfc);">Defender for Cloud</div>
-                <div class="step-detail">DfC fires AI.PromptInjectionAttempt alert with source IP, target AOAI resource, injection payload hash, and MITRE ATT&amp;CK mapping.</div>
+                <div class="step-detail">Defender for Cloud AI threat protection can raise a supported AI-service alert, such as a Prompt Shields jailbreak alert for Foundry agents, with context that helps analysts investigate the attempted injection.</div>
               </div>
               <div class="step">
                 <div class="step-dot"><div class="step-dot-inner" style="background:var(--defender);"></div></div>
@@ -1110,7 +1110,7 @@
                 <div class="step-num">STEP 2</div>
                 <div class="step-label">Labels Applied</div>
                 <div class="step-product" style="background:rgba(6,182,212,0.1);color:var(--purview);">Sensitivity Labels</div>
-                <div class="step-detail">Auto-labeling detects PII patterns and applies &ldquo;Highly Confidential &mdash; HR Only&rdquo; label with AES-256 encryption. Label persists through Copilot grounding.</div>
+                <div class="step-detail">Auto-labeling detects PII patterns and applies a &ldquo;Highly Confidential &mdash; HR Only&rdquo; label according to policy. Copilot honors source permissions and label-based controls during supported grounding and response experiences.</div>
               </div>
               <div class="step">
                 <div class="step-dot"><div class="step-dot-inner" style="background:var(--purview);"></div></div>
@@ -1164,7 +1164,7 @@
                 <div class="step-num">STEP 4</div>
                 <div class="step-label">Agent Quarantined</div>
                 <div class="step-product" style="background:rgba(59,130,246,0.1);color:var(--defender);">Defender XDR</div>
-                <div class="step-detail">Auto-Investigation disables the Agent ID, revokes federated credentials, and surfaces the incident with full topology + data flow evidence in the admin center.</div>
+                <div class="step-detail">Response teams use the incident context to disable or scope the agent identity, revoke exposed credentials where applicable, and review topology and data-flow evidence from supported admin and security portals.</div>
               </div>
             </div>
           </div>
@@ -1237,14 +1237,14 @@
                 <div class="step-num">STEP 3</div>
                 <div class="step-label">Data Exposure Assessed</div>
                 <div class="step-product" style="background:rgba(6,182,212,0.1);color:var(--purview);">Purview DSPM for AI</div>
-                <div class="step-detail">DSPM for AI replays the user's recent Copilot interactions, surfaces which sensitivity labels and SITs were returned in grounded responses, and Insider Risk raises a potential data theft case scoped to that user and device.</div>
+                <div class="step-detail">Purview and audit signals help assess recent Copilot activity, sensitive data indicators, labels involved, and related DLP or Insider Risk events scoped to the affected user and device.</div>
               </div>
               <div class="step">
                 <div class="step-dot"><div class="step-dot-inner" style="background:var(--defender);"></div></div>
                 <div class="step-num">STEP 4</div>
                 <div class="step-label">Incident Correlated &amp; Contained</div>
                 <div class="step-product" style="background:rgba(59,130,246,0.1);color:var(--defender);">Defender XDR</div>
-                <div class="step-detail">XDR joins the MDE alert, CA block events, Copilot interaction telemetry, and Insider Risk signal into one incident. Automated Investigation &amp; Response isolates the device, kills the extension, and Security Copilot drafts the user/manager notification.</div>
+                <div class="step-detail">XDR joins the MDE alert, Conditional Access events, available Copilot audit metadata, and Purview risk signals into one incident. Analysts can use automated investigation actions to isolate the device and remove the malicious extension.</div>
               </div>
             </div>
           </div>
